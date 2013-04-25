@@ -1,0 +1,24 @@
+{
+  "name": "downer",
+  "version": "0.0.0",
+  "dependencies": {
+    "shoe": "~0.0.7",
+    "ecstatic": "~0.1.6",
+    "reconnect": "~0.1.2",
+    "client-reloader": "~1.0.2",
+    "express": "3.2.0",
+    "marked": "0.2.8",
+    "fakeredis": "~0.1.1",
+    "redis": "~0.8.3"
+  },
+  "devDependencies": {
+    "browserify": "*",
+    "grunt": "~0.4.1",
+    "grunt-browserify2": "~0.1.6",
+    "grunt-contrib-watch": "~0.3.1"
+  },
+  "scripts": {
+    "build": "browserify client.js -o static/bundle.js --debug",
+    "start": "browserify client.js -o static/bundle.js --debug && node server.js"
+  }
+}
