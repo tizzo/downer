@@ -27,22 +27,21 @@ app.use(ecstatic(join(__dirname, 'static')));
 app.set('view engine', 'hbs');
 
 app.get('/pages/:title', function(req, res) {
-  // res.writeHead(200);
   var title = req.params.title;
-  // getRtext(title);
-  console.log(title);
   res.render('index', {title: title});
 });
 
 var shoeHandler = reloader(function (stream) {
-  stream.on('connection', function() {
-    console.log('pancakebatter')
-  });
-  stream.pipe(getRtext('foo').createStream()).pipe(stream)
-  // stream.pipe(MuxDemux(function (_stream) {
-  //   console.log(_stream);
-  //   // stream.pipe(getRtext().createStream()).pipe(stream)
-  // }));
+  // We create a new instance of MuxDemux() for each connection.
+  var mdm = MuxDemux();
+  mdm.on('connection', function (_stream) {
+    // On connection we inspect the meta attribute to determine which stream
+    // we are dealing with on the multiplexed connection.  We then looking the
+    // appropriate stream to connect to and pipe it into the stream.
+    _stream.pipe(getRtext(_stream.meta).createStream()).pipe(_stream)
+  })
+  // Wire our muxer/demuxer into the browser
+  stream.pipe(mdm).pipe(stream);
 });
 
 var server = app.listen(PORT, function () {
