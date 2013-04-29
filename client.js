@@ -8,7 +8,16 @@ var MuxDemux = require("mux-demux");
 
 
 var rText = RTEXT = RText()
+// Using the default widget.
+var $textArea = $(rText.widget());
+var $markdown = $('#markdown');
 
+
+// TODO: Make this evented
+// Currently when the initial data events fire on page load
+// to populate the text area with whatever was on the server
+// the page is text area is empty.
+setTimeout(updateMarkdown, 1000);
 
 // `reconnect()` and `reloader()` reconnect the stream in the event
 // of an interruption (network or otherwise).
@@ -19,7 +28,7 @@ reconnect(reloader(function (stream) {
 
   // We create the read/write stream to interface with rText().
   var rtStream = rText.createStream();
-  rtStream.on('data', updateMarkdown);
+  $('#text').append($textArea);
 
   // We connect our shoe stream directly our muxer/demuxer.
   // This allows the muxer to encode anything written to any virtual connection
@@ -29,6 +38,7 @@ reconnect(reloader(function (stream) {
 
   // Create an individual channel on the main read/write stream.
   var mxdTitleStream = mdm.createStream(title)
+  rtStream.on('data', updateMarkdown);
 
   // Pipe anything sent on this channel into the rtext stream and pipe anything
   // coming back from that stream back across the virtual connection.
@@ -36,22 +46,6 @@ reconnect(reloader(function (stream) {
 
 })).connect('/shoe/');
 
-  // Using the default widget.
-  var $textArea = null;
-  var $markdown = null;
-
-$(document).ready(function() {
-  // Using the default widget.
-  $textArea = $(rText.widget());
-  $markdown = $('#markdown');
-
-  $('#text').append($textArea);
-
-  // TODO: find a way to make this evented.
-  // Run an initial render after the text area has time to populate.
-  setTimeout(updateMarkdown, 250);
-});
-
 function updateMarkdown() {
-  $markdown.html(marked($textArea.val()));
+  $markdown.html(marked(rText.text()));
 };
