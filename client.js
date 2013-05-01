@@ -28,6 +28,7 @@ reconnect(reloader(function (stream) {
 
   // We create the read/write stream to interface with rText().
   var rtStream = rText.createStream();
+  $textArea.autogrow();
   $text.append($textArea);
 
   // We connect our shoe stream directly our muxer/demuxer.
@@ -51,6 +52,7 @@ reconnect(reloader(function (stream) {
 
 function updateMarkdown() {
   $markdown.html(marked(rText.text()));
+  $textArea.trigger('change');
 };
 
 var $buttons = $('.buttons');
