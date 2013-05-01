@@ -55,6 +55,10 @@ app.use(app.router);
 app.use(ecstatic(join(__dirname, 'static')));
 app.set('view engine', 'hbs');
 
+app.get('/', function(req, res) {
+  res.render('index');
+});
+
 app.get('/pages/:title', function(req, res) {
   var title = req.params.title;
   res.render('page', {title: title});
