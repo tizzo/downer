@@ -1,0 +1,3 @@
+[submodule "static/css/mfglabs-icons"]
+	path = static/css/mfglabs-icons
+	url = https://github.com/MfgLabs/mfglabs-iconset.git

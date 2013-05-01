@@ -11,6 +11,10 @@ var rText = RTEXT = RText()
 // Using the default widget.
 var $textArea = $(rText.widget());
 var $markdown = $('#markdown');
+var $textWrapper = $('#text-wrapper');
+var $markdownWrapper = $('#markdown-wrapper');
+var $text = $('#text');
+var $markdown = $('#markdown');
 
 // `reconnect()` and `reloader()` reconnect the stream in the event
 // of an interruption (network or otherwise).
@@ -21,7 +25,7 @@ reconnect(reloader(function (stream) {
 
   // We create the read/write stream to interface with rText().
   var rtStream = rText.createStream();
-  $('#text').append($textArea);
+  $text.append($textArea);
 
   // We connect our shoe stream directly our muxer/demuxer.
   // This allows the muxer to encode anything written to any virtual connection
@@ -42,3 +46,30 @@ reconnect(reloader(function (stream) {
 function updateMarkdown() {
   $markdown.html(marked(rText.text()));
 };
+
+var $buttons = $('.buttons');
+var $page = $('#page');
+$('#markdown-button', $buttons).click(function() {
+  $textWrapper.hide();
+  $markdownWrapper
+    .show()
+    .removeClass('span6')
+    .addClass('span12');
+});
+$('#split-button', $buttons).click(function() {
+  $markdownWrapper
+    .show()
+    .removeClass('span12')
+    .addClass('span6');
+  $textWrapper
+    .show()
+    .removeClass('span12')
+    .addClass('span6');
+});
+$('#text-button', $buttons).click(function() {
+  $markdownWrapper.hide();
+  $textWrapper
+    .show()
+    .removeClass('span6')
+    .addClass('span12');
+});
