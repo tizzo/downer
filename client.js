@@ -49,14 +49,28 @@ function updateMarkdown() {
 
 var $buttons = $('.buttons');
 var $page = $('#page');
-$('#markdown-button', $buttons).click(function() {
+
+var $markdownButton = $('#markdown-button', $buttons);
+var $splitButton = $('#split-button', $buttons);
+var $textButton = $('#text-button', $buttons);
+
+function setActive(item) {
+  $markdownButton.removeClass('selected');
+  $textButton.removeClass('selected');
+  $splitButton.removeClass('selected');
+  $(item).addClass('selected');
+}
+
+$markdownButton.click(function() {
+  setActive(this);
   $textWrapper.hide();
   $markdownWrapper
     .show()
     .removeClass('span6')
     .addClass('span12');
 });
-$('#split-button', $buttons).click(function() {
+$splitButton.click(function() {
+  setActive(this);
   $markdownWrapper
     .show()
     .removeClass('span12')
@@ -66,7 +80,8 @@ $('#split-button', $buttons).click(function() {
     .removeClass('span12')
     .addClass('span6');
 });
-$('#text-button', $buttons).click(function() {
+$textButton.click(function() {
+  setActive(this);
   $markdownWrapper.hide();
   $textWrapper
     .show()
