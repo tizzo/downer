@@ -66,31 +66,44 @@ function setActive(item) {
   $splitButton.removeClass('selected');
   $(item).addClass('selected');
 }
-
-$markdownButton.click(function() {
-  setActive(this);
-  $textWrapper.hide();
-  $markdownWrapper
-    .show()
-    .removeClass('span6')
-    .addClass('span12');
-});
-$splitButton.click(function() {
-  setActive(this);
-  $markdownWrapper
-    .show()
-    .removeClass('span12')
-    .addClass('span6');
-  $textWrapper
-    .show()
-    .removeClass('span12')
-    .addClass('span6');
-});
-$textButton.click(function() {
-  setActive(this);
-  $markdownWrapper.hide();
-  $textWrapper
-    .show()
-    .removeClass('span6')
-    .addClass('span12');
-});
+// Mode should be one of 'markdown', 'split', or 'text'
+function setMode(mode, element) {
+  if (element) {
+    setActive(element);
+  }
+  window.location.hash = mode;
+  switch (mode) {
+    case 'markdown':
+      $textWrapper.hide();
+      $markdownWrapper
+        .show()
+        .removeClass('span6')
+        .addClass('span12');
+      break;
+    case 'split':
+      $markdownWrapper
+        .show()
+        .removeClass('span12')
+        .addClass('span6');
+      $textWrapper
+        .show()
+        .removeClass('span12')
+        .addClass('span6');
+      break;
+    case 'text':
+      $markdownWrapper.hide();
+      $textWrapper
+        .show()
+        .removeClass('span6')
+        .addClass('span12');
+      break;
+  }
+}
+var mode = window.location.hash
+if (mode && mode != '') {
+  var mode = mode.substr(1);
+  setMode(mode, $(window['$' + mode + 'Button']).get());
+}
+$markdownButton.click(function () { setMode('markdown', this); });
+$splitButton.click(function () { setMode('split', this); });
+$textButton.click(function () { setMode('text', this); });
