@@ -22,7 +22,7 @@ textarea, textarea:focus {
 }
 
 #page {
-  margin-top: 3em;
+  margin-top: 0.5em;
 }
 
 #markdown, #text {
@@ -32,15 +32,15 @@ textarea, textarea:focus {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 1em;
-  background: url('./images/white_wall_hash.png')
+  background: url('./images/white_wall_hash.png');
+}
+
+#markdown-wrapper, #text-wrapper {
+  margin-bottom: 1em;
 }
 
 #markdown {
   min-height: 35em;
-}
-
-.buttons {
-  margin-bottom: 0.5em;
 }
 
 .button {
@@ -50,7 +50,7 @@ textarea, textarea:focus {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 0.8em 0.5em 0em 0.5em;
-  margin: 0.3em 0 0.3em 0.6em;
+  margin: 0.3em 0 1em 0.6em;
   height: 30px;
   cursor: hand;
   cursor: pointer;
@@ -60,4 +60,38 @@ textarea, textarea:focus {
 .button i {
   height: 1em;
   width: 1em;
+}
+
+.button {
+  -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+  box-shadow:inset 0px 1px 0px 0px #ffffff;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+  background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+  background-color:#ededed;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #dcdcdc;
+  display:inline-block;
+  color:#777777;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #ffffff;
+}
+
+.button:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+  background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+  background-color:#dfdfdf;
+}
+
+.button:active {
+  position:relative;
+  top:1px;
+}
+
+.button.selected {
+  color: black;
 }
