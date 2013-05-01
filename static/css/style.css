@@ -19,6 +19,7 @@ textarea, textarea:focus {
   outline-style: none;
   box-shadow: none;
   border: none;
+  min-height: 35em !important;
 }
 
 #page {
