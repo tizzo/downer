@@ -34,13 +34,10 @@ if (!conf.testing) {
 
 
 function getRtext(uri, next) {
-  if (!openPages[uri]) {
+  if (openPages[uri] == undefined) {
     openPages[uri] = REdit();
     redisClient.get('pages:' + uri, function(error, contents) {
-      if (contents == null) {
-        openPages[uri].push('# ' + uri);
-      }
-      else {
+      if (contents != null) {
         openPages[uri].push(contents);
       }
       next(null, openPages[uri]);
@@ -74,6 +71,9 @@ var shoeHandler = reloader(function (stream) {
     getRtext(_stream.meta, function(error, rText) {
       rtStream = rText.createStream();
       _stream.pipe(rtStream).pipe(_stream)
+      if (rText.text() == '') {
+        rText.push('# ' + _stream.meta);
+      }
       rtStream.on('data', function() {
         redisClient.set('pages:' + _stream.meta, rText.text());
       });

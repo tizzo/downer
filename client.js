@@ -23,6 +23,9 @@ reconnect(reloader(function (stream) {
   // We create a new instance of MuxDemux() for each connection.
   var mdm = MuxDemux()
 
+  // Ensure we don't miss messages while we get setup.
+  mdm.pause();
+
   // We create the read/write stream to interface with rText().
   var rtStream = rText.createStream();
   $text.append($textArea);
@@ -36,6 +39,9 @@ reconnect(reloader(function (stream) {
   // Create an individual channel on the main read/write stream.
   var mxdTitleStream = mdm.createStream(title)
   mxdTitleStream.on('data', updateMarkdown);
+
+  // Ensure we don't miss messages while we get setup.
+  mdm.resume();
 
   // Pipe anything sent on this channel into the rtext stream and pipe anything
   // coming back from that stream back across the virtual connection.
