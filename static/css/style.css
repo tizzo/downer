@@ -1,0 +1,40 @@
+#text textarea {
+  width: 100%;
+}
+
+body {
+  background: url('./images/navy_blue.png');
+  background-repeat: repeat-x repeat-y;
+}
+
+textarea, textarea:focus {
+  background: none;
+  margin: 0;
+  padding: 0;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  appearance:none;
+  outline: none;
+  outline-color: transparent;
+  outline-style: none;
+  box-shadow: none;
+  border: none;
+}
+
+#page {
+  margin-top: 3em;
+}
+
+#markdown {
+  min-height: 35em;
+}
+
+#markdown, #text {
+  background: white;
+  height: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 1em;
+  background: url('./images/white_wall_hash.png')
+}
