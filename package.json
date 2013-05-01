@@ -12,7 +12,9 @@
     "redis": "~0.8.3",
     "mustache": "~0.7.2",
     "hbs": "~2.1.0",
-    "mux-demux-shoe": "~0.2.7"
+    "mux-demux-shoe": "~0.2.7",
+    "r-edit": "~0.2.2",
+    "mux-demux": "~3.6.3"
   },
   "devDependencies": {
     "browserify": "*",
