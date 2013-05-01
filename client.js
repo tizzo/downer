@@ -12,13 +12,6 @@ var rText = RTEXT = RText()
 var $textArea = $(rText.widget());
 var $markdown = $('#markdown');
 
-
-// TODO: Make this evented
-// Currently when the initial data events fire on page load
-// to populate the text area with whatever was on the server
-// the page is text area is empty.
-setTimeout(updateMarkdown, 1000);
-
 // `reconnect()` and `reloader()` reconnect the stream in the event
 // of an interruption (network or otherwise).
 reconnect(reloader(function (stream) {
@@ -38,7 +31,7 @@ reconnect(reloader(function (stream) {
 
   // Create an individual channel on the main read/write stream.
   var mxdTitleStream = mdm.createStream(title)
-  rtStream.on('data', updateMarkdown);
+  mxdTitleStream.on('data', updateMarkdown);
 
   // Pipe anything sent on this channel into the rtext stream and pipe anything
   // coming back from that stream back across the virtual connection.
